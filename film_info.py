@@ -1,6 +1,16 @@
 import requests
 import json
 
+class Film():
+    def __init__ (self, name, id, rank, cast):
+        self.name = name
+        self.id = id
+        self.rank = rank
+        self.cast = cast
+    def return_imdb_film_url (self):
+        url = f"https://www.imdb.com/title/{self.id}/?ref_=nv_sr_srsg_0"
+        return url
+
 film = input("film: ")
 imdb_search_url = f"https://v2.sg.media-imdb.com/suggestion/{film[0]}/{'_'.join(film.split())}.json"
 imdb_search_req = requests.get(url = imdb_search_url)
@@ -16,6 +26,8 @@ except:
     print("wrong input")
     exit()
 
+TheFilm = Film(imdb_search_res['d'][tmp_ans-1]['l'], imdb_search_res['d'][tmp_ans-1]['id'], imdb_search_res['d'][tmp_ans-1]['rank'], imdb_search_res['d'][tmp_ans-1]['s'])
+
 if tmp_ans in range(len(imdb_search_res['d'])):
     print("\n"*2)
     print("-------------------------------------")
@@ -27,8 +39,6 @@ if tmp_ans in range(len(imdb_search_res['d'])):
 else:
     print("wrong input")
     exit()
-
-# imdb_film_url = f""
 
 
 
